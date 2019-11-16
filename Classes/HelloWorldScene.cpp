@@ -130,7 +130,6 @@ bool HelloWorld::init()
 
 void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 {
-	count++;
 
 	GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION| GL::VERTEX_ATTRIB_FLAG_COLOR);
 	// つかうよ！
@@ -141,16 +140,17 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	const float x = 0.7f;
 	const float y = 0.7f;
 
+	///赤い四角形の描画
 	// 座標
 	pos[0] = Vec3(-x, -y, 0); // 左下
 	pos[1] = Vec3(-x,  y, 0); // 左上
 	pos[2] = Vec3( x, -y, 0); // 右下
 	pos[3] = Vec3(x, y, 0); // 右上
 	// 色
-	color[0] = Vec3(1 - count / 120.0f, count / 120.0f, 0);
-	color[1] = Vec3(1 - count / 120.0f, count / 120.0f, 0);
-	color[2] = Vec3(1 - count / 120.0f, count / 120.0f, 0);
-	color[3] = Vec3(1 - count / 120.0f, count / 120.0f, 0);
+	color[0] = Vec3(1, 0, 0);
+	color[1] = Vec3(1, 0, 0);
+	color[2] = Vec3(1, 0, 0);
+	color[3] = Vec3(1, 0, 0);
 
 
 	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0, pos);
@@ -159,6 +159,19 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	// 描画
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
+	/// 青い四角形の描画
+	// 座標
+	pos[0].x += 0.1f; pos[0].y += 0.1f;
+	pos[1].x += 0.1f; pos[1].y += 0.1f;
+	pos[2].x += 0.1f; pos[2].y += 0.1f;
+	pos[3].x += 0.1f; pos[3].y += 0.1f;
+	// 色
+	color[0] = Vec3(0, 0, 1);
+	color[1] = Vec3(0, 0, 1);
+	color[2] = Vec3(0, 0, 1);
+	color[3] = Vec3(0, 0, 1);
+	// 描画
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 
