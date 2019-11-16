@@ -132,22 +132,20 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	// つかうよ！
 	m_pProgram->use();
 
-	Vec3 pos[6];
-	const float x = 0.2f;
-	const float y = 0.3f;
+	Vec3 pos[4];
+	const float x = 0.7f;
+	const float y = 0.7f;
 
 	// １つめの三角形
 	pos[0] = Vec3(-x, -y, 0); // 左下
 	pos[1] = Vec3(-x,  y, 0); // 左上
 	pos[2] = Vec3( x, -y, 0); // 右下
 	// ２つめの三角形
-	pos[3] = Vec3(-x, y, 0); // 左上
-	pos[4] = Vec3(x, -y, 0); // 右下
-	pos[5] = Vec3(x, y, 0); // 右上
+	pos[3] = Vec3(x, y, 0); // 右上
 
 	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0, pos);
 	// 描画
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 }
 
