@@ -47,6 +47,8 @@ public:
 	int uniform_sampler;
 	cocos2d::Texture2D* m_pTexture;
 
+	int uniform_wvp_matrix;
+
 	int counter = 0;
 
 };
