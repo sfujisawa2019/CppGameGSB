@@ -163,10 +163,10 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	pos[2] = Vec3( x -counter / 60.0f, -y + counter / 60.0f, 0); // 右下
 	pos[3] = Vec3( x + counter / 60.0f,  y - counter / 60.0f, 0); // 右上
 	// 色
-	color[0] = Vec4(1, 1, 1, 1);
-	color[1] = Vec4(1, 1, 1, 1);
-	color[2] = Vec4(1, 1, 1, 1);
-	color[3] = Vec4(1, 1, 1, 1);
+	color[0] = Vec4(1, 0, 0, 1);
+	color[1] = Vec4(1, 0, 0, 1);
+	color[2] = Vec4(1, 0, 0, 1);
+	color[3] = Vec4(1, 0, 0, 1);
 	// テクスチャ座標
 	uv[0] = Vec2(0, 1); // 左下
 	uv[1] = Vec2(0, 0);	// 左上
