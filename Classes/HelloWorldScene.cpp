@@ -136,6 +136,7 @@ bool HelloWorld::init()
 
 void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 {
+	counter++;
 	//glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 	//GL::blendFunc(GL_ONE, GL_ONE);
 	// 半透明合成
@@ -156,17 +157,17 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	pos[0] = Vec3(-x, -y, 0); // 左下
 	pos[1] = Vec3(-x,  y, 0); // 左上
 	pos[2] = Vec3( x, -y, 0); // 右下
-	pos[3] = Vec3(x, y, 0); // 右上
+	pos[3] = Vec3(x, y, 0);   // 右上
 	// 色
 	color[0] = Vec4(1, 1, 1, 1);
 	color[1] = Vec4(1, 1, 1, 1);
 	color[2] = Vec4(1, 1, 1, 1);
 	color[3] = Vec4(1, 1, 1, 1);
 	// テクスチャ座標
-	uv[0] = Vec2(0, 1);
-	uv[1] = Vec2(0, 0);
-	uv[2] = Vec2(1, 1);
-	uv[3] = Vec2(1, 0);
+	uv[0] = Vec2(0.2f + counter / 120.0f, 0.7f);  // 左下
+	uv[1] = Vec2(0.2f + counter / 120.0f, 0.3f);	// 左上
+	uv[2] = Vec2(0.5f + counter / 120.0f, 0.7f);	// 右下
+	uv[3] = Vec2(0.5f + counter / 120.0f, 0.3f);	// 右上
 
 	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0, pos);
 	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, color);
