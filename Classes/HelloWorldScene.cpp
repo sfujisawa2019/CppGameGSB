@@ -189,7 +189,7 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	matProjection = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
 	matView = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 
-	Mat4::createTranslation(Vec3(250, 50, 0), &matTrans);
+	Mat4::createTranslation(Vec3(1280/2.0f, 720/2.0f, 0), &matTrans);
 	Mat4::createRotationY(yaw, &matRot);
 	Mat4::createScale(Vec3(1, 1, 1), &matScale);
 	matWorld = matTrans * matRot * matScale;
