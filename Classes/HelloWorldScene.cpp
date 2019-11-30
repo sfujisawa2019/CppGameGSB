@@ -181,7 +181,7 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	//GL::bindTexture2D(m_pTexture->getName());
 
 	static float yaw = 0.0f;
-	yaw += 0.01f;
+	yaw += CC_DEGREES_TO_RADIANS(5.0f);
 	Mat4 matProjection;
 	Mat4 matView;
 	Mat4 matWVP;
@@ -191,7 +191,9 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 
 	Mat4::createTranslation(Vec3(1280/2.0f, 720/2.0f, 0), &matTrans);
 	Mat4::createRotationY(yaw, &matRot);
-	Mat4::createScale(Vec3(1, 1, 1), &matScale);
+	// +1Å`+3î{Ç≈èzä¬
+	float scale = sinf(yaw)+2.0f;
+	Mat4::createScale(Vec3(scale, scale, scale), &matScale);
 	matWorld = matTrans * matRot * matScale;
 	matWVP = matProjection * matView * matWorld;
 	glUniformMatrix4fv(uniform_wvp_matrix, 1, GL_FALSE, matWVP.m);
