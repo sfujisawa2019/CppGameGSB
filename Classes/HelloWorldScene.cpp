@@ -158,10 +158,10 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 
 	///赤い四角形の描画
 	// 座標
-	pos[0] = Vec3(-x -counter / 60.0f, -y + counter / 60.0f, 0); // 左下
-	pos[1] = Vec3(-x -counter / 60.0f,  y + counter / 60.0f, 0); // 左上
-	pos[2] = Vec3( x -counter / 60.0f, -y + counter / 60.0f, 0); // 右下
-	pos[3] = Vec3( x + counter / 60.0f,  y - counter / 60.0f, 0); // 右上
+	pos[0] = Vec3(-x, -y, 0); // 左下
+	pos[1] = Vec3(-x, +y, 0); // 左上
+	pos[2] = Vec3(+x, -y, 0); // 右下
+	pos[3] = Vec3(+x, +y, 0); // 右上
 	// 色
 	color[0] = Vec4(1, 0, 0, 1);
 	color[1] = Vec4(1, 0, 0, 1);
