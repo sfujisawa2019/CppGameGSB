@@ -194,7 +194,7 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	Mat4::createRotationY(yaw, &matRot);
 	// +1Å`+3î{Ç≈èzä¬
 	//float scale = sinf(yaw)+2.0f;
-	float scale = 1.0f;
+	float scale = 2.0f;
 	Mat4::createScale(Vec3(scale, scale, scale), &matScale);
 	matWorld = matTrans * matRot * matScale;
 	matWVP = matProjection * matView * matWorld;
