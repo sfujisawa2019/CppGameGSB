@@ -90,23 +90,11 @@ void ShaderNode::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	uv[2] = Vec2(1, 1);	// âEâ∫
 	uv[3] = Vec2(1, 0);	// âEè„
 
-	static float yaw = 0.0f;
-	yaw += CC_DEGREES_TO_RADIANS(5.0f);
+	// çsóÒåvéZ
 	Mat4 matProjection;
-	Mat4 matView;
-	
-	Mat4 matTrans, matScale, matRot, matWorld;
 	matProjection = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
-	matView = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
-
-	Mat4::createTranslation(Vec3(1280 / 2.0f, 720 / 2.0f, 0), &matTrans);
-	Mat4::createRotationY(yaw, &matRot);
-	// +1Å`+3î{Ç≈èzä¬
-	//float scale = sinf(yaw)+2.0f;
-	float scale = 2.0f;
-	Mat4::createScale(Vec3(scale, scale, scale), &matScale);
-	matWorld = matTrans * matRot * matScale;
-	matWVP = matProjection * matView * matWorld;
+	
+	matWVP = matProjection * transform;
 }
 
 void ShaderNode::onDraw(const cocos2d::Mat4 & transform, uint32_t flags)
