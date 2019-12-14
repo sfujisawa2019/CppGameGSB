@@ -139,6 +139,16 @@ bool HelloWorld::init()
 
 void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 {
+	// onDrawÇÉJÉXÉ^ÉÄÉRÉ}ÉìÉhÇ∆ÇµÇƒó\ñÒ
+	_customCommand.init(_globalZOrder, transform, flags);
+	_customCommand.func = CC_CALLBACK_0(HelloWorld::onDraw, this, transform, flags);
+	renderer->addCommand(&_customCommand);
+
+}
+
+void HelloWorld::onDraw(const cocos2d::Mat4 & transform, uint32_t flags)
+{
+
 	counter++;
 	//glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 	//GL::blendFunc(GL_ONE, GL_ONE);
@@ -190,7 +200,7 @@ void HelloWorld::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	matProjection = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
 	matView = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
 
-	Mat4::createTranslation(Vec3(1280/2.0f, 720/2.0f, 0), &matTrans);
+	Mat4::createTranslation(Vec3(1280 / 2.0f, 720 / 2.0f, 0), &matTrans);
 	Mat4::createRotationY(yaw, &matRot);
 	// +1Å`+3î{Ç≈èzä¬
 	//float scale = sinf(yaw)+2.0f;

@@ -77,7 +77,7 @@ bool HelloShader::init()
 	this->addChild(sprite, 0);
 
 	// LayerColorの使用例
-	LayerColor* layerColor = LayerColor::create(Color4B(255, 255, 0, 255), 500, 500);
+	LayerColor* layerColor = LayerColor::create(Color4B(255, 255, 0, 255), 600, 500);
 	this->addChild(layerColor, 2);
 
 	// HelloWorldのレイヤーを作成。描画優先は1
