@@ -85,12 +85,12 @@ bool HelloShader::init()
 	this->addChild(node, 1);
 	node->setPosition(640, 360);
 	node->setRotation(45);
-	node->setScale(2.0f);
+	//node->setScale(2.0f);
 	node->setContentSize(Size(500, 500));
 	//node->setFlippedY(true);
 	//node->setVisible(false);
-	//node->setColor(Color3B(0, 0, 255));
-	//node->setOpacity(0);
+	node->setColor(Color3B(0, 0, 255));
+	node->setOpacity(128);
 
 	// ƒAƒNƒVƒ‡ƒ“
 	RotateBy* action = RotateBy::create(10, 360 * 10);
