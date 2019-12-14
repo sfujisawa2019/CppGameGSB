@@ -27,15 +27,10 @@
 
 #include "cocos2d.h"
 
-class HelloWorld : public cocos2d::Scene
+class HelloWorld : public cocos2d::Node
 {
 public:
-    static cocos2d::Scene* createScene();
-
     virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
@@ -53,6 +48,11 @@ public:
 	int counter = 0;
 
 	cocos2d::CustomCommand _customCommand;
+
+	cocos2d::Vec3 pos[4];
+	cocos2d::Vec4 color[4];
+	cocos2d::Vec2 uv[4];
+	cocos2d::Mat4 matWVP;
 };
 
 #endif // __HELLOWORLD_SCENE_H__
