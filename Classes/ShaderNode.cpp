@@ -52,6 +52,7 @@ bool ShaderNode::init()
 	m_pProgram->link();
 
 	uniform_wvp_matrix = glGetUniformLocation(m_pProgram->getProgram(), "u_wvp_matrix");
+	uniform_center = glGetUniformLocation(m_pProgram->getProgram(), "center");
 
 	m_pProgram->updateUniforms();
 
@@ -116,6 +117,9 @@ void ShaderNode::onDraw(const cocos2d::Mat4 & transform, uint32_t flags)
 	//GL::bindTexture2D(m_pTexture->getName());
 
 	glUniformMatrix4fv(uniform_wvp_matrix, 1, GL_FALSE, matWVP.m);
+	Vec2 center = getPosition();
+	glUniform2f(uniform_center, center.x, center.y);
+
 	// •`‰æ
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
