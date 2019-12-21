@@ -69,12 +69,12 @@ bool HelloShader::init()
 
 	Director::getInstance()->setClearColor(Color4F(0.0f, 1.0f, 0.0f, 0.0f));
 
-	// Cocosのロゴスプライトを作成。描画優先は0
-	sprite = Sprite::create("HelloWorld.png");
-	sprite->setColor(Color3B(0xff, 0x00, 0x00));
-	sprite->setScale(2.0f);
-	sprite->setPosition(Vec2(visibleSize.width/2 + origin.x + 200, visibleSize.height/2 + origin.y));
-	this->addChild(sprite, 0);
+	//// Cocosのロゴスプライトを作成。描画優先は0
+	//sprite = Sprite::create("HelloWorld.png");
+	//sprite->setColor(Color3B(0xff, 0x00, 0x00));
+	//sprite->setScale(2.0f);
+	//sprite->setPosition(Vec2(visibleSize.width/2 + origin.x + 200, visibleSize.height/2 + origin.y));
+	//this->addChild(sprite, 0);
 
 	//// LayerColorの使用例
 	//LayerColor* layerColor = LayerColor::create(Color4B(255, 255, 0, 255), 600, 500);
@@ -84,21 +84,21 @@ bool HelloShader::init()
 	node = ShaderNode::create();
 	this->addChild(node, 1);
 	node->setPosition(640, 360);
-	node->setRotation(45);
+	//node->setRotation(45);
 	//node->setScale(2.0f);
-	node->setContentSize(Size(500, 500));
+	node->setContentSize(Size(1280, 100));
 	//node->setFlippedY(true);
 	//node->setVisible(false);
-	node->setColor(Color3B(0, 0, 255));
-	node->setOpacity(128);
+	//node->setColor(Color3B(0, 0, 255));
+	//node->setOpacity(128);
 
 	// アクション
-	RotateBy* action = RotateBy::create(10, 360 * 10);
-	node->runAction(action);
+	//RotateBy* action = RotateBy::create(10, 360 * 10);
+	//node->runAction(action);
 
-	Sprite* spriteA = Sprite::create("HelloWorld.png");
-	this->addChild(spriteA, 2);
-	spriteA->setPosition(400, 360);
+	//Sprite* spriteA = Sprite::create("HelloWorld.png");
+	//this->addChild(spriteA, 2);
+	//spriteA->setPosition(400, 360);
 	//Sprite* spriteB;
 	//Sprite* spriteC;
 
