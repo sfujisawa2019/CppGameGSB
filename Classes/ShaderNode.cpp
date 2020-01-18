@@ -55,11 +55,14 @@ bool ShaderNode::init()
 	uniform_wvp_matrix = glGetUniformLocation(m_pProgram->getProgram(), "u_wvp_matrix");
 	uniform_center = glGetUniformLocation(m_pProgram->getProgram(), "center");
 	uniform_size_div2 = glGetUniformLocation(m_pProgram->getProgram(), "size_div2");
+	uniform_time = glGetUniformLocation(m_pProgram->getProgram(), "time");
 
 	m_pProgram->updateUniforms();
 
 	//Director::getInstance()->setClearColor(Color4F(0, 1, 0, 0));
 	//Director::getInstance()->setClearColor(Color4F(1, 1, 1, 0));
+
+	m_time = 0.0f;
 
     return true;
 }
@@ -99,6 +102,12 @@ void ShaderNode::draw(Renderer* renderer, const Mat4& transform, uint32_t flags)
 	matProjection = _director->getMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_PROJECTION);
 	
 	matWVP = matProjection * transform;
+
+	unsigned int total = _director->getTotalFrames();
+
+	float inter = _director->getAnimationInterval();
+	// ‹N“®‚©‚ç‚ÌŒo‰ß•b”
+	m_time = total * inter;
 }
 
 void ShaderNode::onDraw(const cocos2d::Mat4 & transform, uint32_t flags)
@@ -118,12 +127,15 @@ void ShaderNode::onDraw(const cocos2d::Mat4 & transform, uint32_t flags)
 	//glUniform1i(uniform_sampler, 0);
 	//GL::bindTexture2D(m_pTexture->getName());
 
+	// uniform•Ï”‚É’l‚ğ“]‘—‚·‚é
 	glUniformMatrix4fv(uniform_wvp_matrix, 1, GL_FALSE, matWVP.m);
 	Vec2 center = getPosition();
 	glUniform2f(uniform_center, center.x, center.y);
 
 	Size size = getContentSize();
 	glUniform2f(uniform_size_div2, size.width / 2.0f, size.height / 2.0f);
+
+	glUniform1f(uniform_time, m_time);
 
 	// •`‰æ
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
