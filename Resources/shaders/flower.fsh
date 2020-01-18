@@ -12,27 +12,19 @@ void main()
 	vec2 p = gl_FragCoord.xy - center;
 
 	float col;
+	float col1, col2;
 
-	//1. pの長さを求める(length)[0～250]
-	float len = length(p);
-	//2. 長さの最大値で割る[0.0～1.0]
-	len /= size_div2.x;
-	//3. colに入れる
-	col = len;
-	//4. 色反転
-	col = 1 - col;
-	// くっきり塗り分け
-	//col = sign(col);
-	// ０より大きいか判定
-	col = step(0.000001, col);
+	// 右を出発点として反時計回りの角度を計算
+	float angle = atan(p.y, p.x);
+	// ラジアンを度数法に変換[-180～0～+180]
+	float deg = degrees(angle);
+	// マイナスをプラスに変換[+180～0～+180]
+	deg = abs(deg);
+	// 30度をしきい値でぬりわけ
+	col1 = step(30, deg);
 
-	// [-1.0～0～+1.0]最大値で割る
-	//col = p.y / size_div2.y;
-	// [+1.0～0～+1.0]絶対値を取る
-	//col = abs(col);
-	// [0～1～0]色の反転
-	//col = 1.0 - col;
+	col = col1;
 
 	// 最終的な色の決定
-	gl_FragColor = vec4(col, col, col, 1);
+	gl_FragColor = vec4(1, 1, 1, col);
 }
