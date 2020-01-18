@@ -43,8 +43,10 @@ public:
 	int uniform_sampler;
 	cocos2d::Texture2D* m_pTexture;
 
+	// uniformî‘çÜ
 	int uniform_wvp_matrix;
 	int uniform_center;
+	int uniform_size_div2;
 
 	int counter = 0;
 

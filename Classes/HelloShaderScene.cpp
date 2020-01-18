@@ -86,7 +86,7 @@ bool HelloShader::init()
 	node->setPosition(640, 360);
 	//node->setRotation(45);
 	//node->setScale(2.0f);
-	node->setContentSize(Size(1000, 500));
+	node->setContentSize(Size(500, 500));
 	//node->setFlippedY(true);
 	//node->setVisible(false);
 	//node->setColor(Color3B(0, 0, 255));

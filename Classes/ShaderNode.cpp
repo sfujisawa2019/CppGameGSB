@@ -51,8 +51,10 @@ bool ShaderNode::init()
 
 	m_pProgram->link();
 
+	// シェーダからuniform番号を取得
 	uniform_wvp_matrix = glGetUniformLocation(m_pProgram->getProgram(), "u_wvp_matrix");
 	uniform_center = glGetUniformLocation(m_pProgram->getProgram(), "center");
+	uniform_size_div2 = glGetUniformLocation(m_pProgram->getProgram(), "size_div2");
 
 	m_pProgram->updateUniforms();
 
@@ -119,6 +121,9 @@ void ShaderNode::onDraw(const cocos2d::Mat4 & transform, uint32_t flags)
 	glUniformMatrix4fv(uniform_wvp_matrix, 1, GL_FALSE, matWVP.m);
 	Vec2 center = getPosition();
 	glUniform2f(uniform_center, center.x, center.y);
+
+	Size size = getContentSize();
+	glUniform2f(uniform_size_div2, size.width / 2.0f, size.height / 2.0f);
 
 	// 描画
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
