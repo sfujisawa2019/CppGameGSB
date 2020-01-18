@@ -21,6 +21,10 @@ void main()
 	col = len;
 	//4. F”½“]
 	col = 1 - col;
+	// ‚­‚Á‚«‚è“h‚è•ª‚¯
+	//col = sign(col);
+	// ‚O‚æ‚è‘å‚«‚¢‚©”»’è
+	col = step(0.000001, col);
 
 	// [-1.0`0`+1.0]Å‘å’l‚ÅŠ„‚é
 	//col = p.y / size_div2.y;
