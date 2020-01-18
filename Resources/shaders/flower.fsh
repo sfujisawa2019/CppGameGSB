@@ -14,6 +14,7 @@ void main()
 	float col;
 	float col1, col2;
 
+	/* ここから怪獣の形をつくる */
 	// 右を出発点として反時計回りの角度を計算
 	float angle = atan(p.y, p.x);
 	// ラジアンを度数法に変換[-180～0～+180]
@@ -23,8 +24,17 @@ void main()
 	// 30度をしきい値でぬりわけ
 	col1 = step(30, deg);
 
-	col = col1;
+	/* 円の形をつくる */
+	// 中心からの距離[0.0～1.0]
+	float len = length(p) / size_div2.x;
+	// 白黒反転
+	col2 = 1 - len;
+	// プラスの部分を白に、それ以外を黒に
+	col2 = sign(col2);
+
+	// 掛け算で形状を合成
+	col = col1 * col2;
 
 	// 最終的な色の決定
-	gl_FragColor = vec4(1, 1, 1, col);
+	gl_FragColor = vec4(1, 1, 0, col);
 }
