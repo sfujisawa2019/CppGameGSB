@@ -14,9 +14,10 @@ void main()
 	vec2 p = gl_FragCoord.xy - center;
 
 	float col;
+
+	float w = sin(time * 3.14);
 	
-	// 5•b‚©‚¯‚Ä”’‚É‚È‚é
-	col = time / 5.0;
+	col = w / 2.0 + 0.5;
 
 	// ÅI“I‚ÈF‚ÌŒˆ’è
 	gl_FragColor = vec4(col, col, col, 1);
