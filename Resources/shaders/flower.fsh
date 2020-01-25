@@ -17,16 +17,23 @@ void main()
 
 	float col;
 
-	// ‰E‚ğŠî€‚Æ‚µ‚½Šp“x‚ğŒvZ[-3.14`+3.14]
-	float angle = atan(p.y, p.x);
+	// ‡@
+	// ’†S‚©‚ç‚Ì‹——£ [0.0`1.0]
+	float len = length(p);
 
-	// [-1.0`+1.0]
-	//float w = sin(sin(time * 3.14) - angle - 3.14/2);
-	float w = cos(sin(time * 3.14) - angle);
-	// [-0.5`+0.5]
-	col = w / 2.0;
+	col = len;
+
+	// ‡A
+	// F‚Ì”½“] [1.0`0.0]
+	col = 1 - col;
+
+	// ‡B
+	// sinŠÖ”‚ÆŠÔ‚É‚æ‚é‰e‹¿ [+0.0`+1.0]
+	//float s = sin(sin(time*3.14)+3.14/2) / 2.0 + 0.5;
+	float s = cos(sin(time*3.14)) / 2.0 + 0.5;
+
 	// [+0.0`+1.0]
-	col = col + 0.5;
+	col *= s;
 
 	// ÅI“I‚ÈF‚ÌŒˆ’è
 	gl_FragColor = vec4(col, col, col, 1);
