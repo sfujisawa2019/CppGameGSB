@@ -81,12 +81,12 @@ bool HelloShader::init()
 	//this->addChild(layerColor, 2);
 
 	// ShaderNodeを作成。描画優先は1
-	node = ShaderNode::create();
-	this->addChild(node, 1);
-	node->setPosition(640, 360);
+	//node = ShaderNode::create();
+	//this->addChild(node, 1);
+	//node->setPosition(640, 360);
 	//node->setRotation(45);
 	//node->setScale(2.0f);
-	node->setContentSize(Size(500, 500));
+	//node->setContentSize(Size(500, 500));
 	//node->setFlippedY(true);
 	//node->setVisible(false);
 	//node->setColor(Color3B(0, 0, 255));
@@ -115,20 +115,36 @@ bool HelloShader::init()
 	listener->onTouchCancelled = CC_CALLBACK_2(HelloShader::onTouchEnded, this);
 	getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 
+	// Sprite3Dの生成
+	m_pSprite3D = Sprite3D::create("orc/orc.c3b");
+	m_pSprite3D->setPosition(640, 360);
+
+	m_pSprite3D->setScale(10.0f);
+	m_pSprite3D->setRotation3D(Vec3(0, 180, 0));
+
+	this->addChild(m_pSprite3D, 1);
+
+	// アニメーションの実行
+	Animation3D* animation = Animation3D::create("orc/orc.c3t");
+	Animate3D* animate = Animate3D::create(animation);
+	RepeatForever* repeat = RepeatForever::create(animate);
+	m_pSprite3D->runAction(animate);
+
+
 	return true;
 }
 
 bool HelloShader::onTouchBegan(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	// タッチ座標にノードを移動
-	node->setPosition(touch->getLocation());
+	m_pSprite3D->setPosition(touch->getLocation());
 	return true;
 }
 
 void HelloShader::onTouchMoved(cocos2d::Touch * touch, cocos2d::Event * event)
 {
 	// タッチ座標にノードを移動
-	node->setPosition(touch->getLocation());
+	m_pSprite3D->setPosition(touch->getLocation());
 }
 
 void HelloShader::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
@@ -137,7 +153,7 @@ void HelloShader::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 
 void HelloShader::menuCloseCallback(Ref* pSender)
 {
-	Director::getInstance()->end();
+	//Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	exit(0);
