@@ -128,7 +128,7 @@ bool HelloShader::init()
 	Animation3D* animation = Animation3D::create("orc/orc.c3t");
 	Animate3D* animate = Animate3D::create(animation);
 	RepeatForever* repeat = RepeatForever::create(animate);
-	m_pSprite3D->runAction(animate);
+	m_pSprite3D->runAction(repeat);
 
 
 	return true;
@@ -153,6 +153,13 @@ void HelloShader::onTouchEnded(cocos2d::Touch * touch, cocos2d::Event * event)
 
 void HelloShader::menuCloseCallback(Ref* pSender)
 {
+	m_pSprite3D->stopAllActions();
+	// アニメーションの実行
+	Animation3D* animation = Animation3D::create("orc/orc_jump.c3t");
+	Animate3D* animate = Animate3D::create(animation);
+	//RepeatForever* repeat = RepeatForever::create(animate);
+	m_pSprite3D->runAction(animate);
+
 	//Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
