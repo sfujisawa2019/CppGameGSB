@@ -41,13 +41,16 @@ bool ShaderNode::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	m_pProgram = new GLProgram;
-	m_pProgram->initWithFilenames("shaders/flower.vsh", "shaders/flower.fsh");
+	m_pProgram->initWithFilenames("shaders/dynamic_light.vsh", "shaders/dynamic_light.fsh");
+	// シェーダーコードからattribute変数に番号を振る
 	m_pProgram->bindAttribLocation("a_position", GLProgram::VERTEX_ATTRIB_POSITION);
 	m_pProgram->bindAttribLocation("a_color", GLProgram::VERTEX_ATTRIB_COLOR);
-	//m_pProgram->bindAttribLocation("a_texCoord", GLProgram::VERTEX_ATTRIB_TEX_COORD);
+	m_pProgram->bindAttribLocation("a_texCoord", GLProgram::VERTEX_ATTRIB_TEX_COORD);
 
-	//uniform_sampler = glGetUniformLocation(m_pProgram->getProgram(), "sampler");
-	//m_pTexture = Director::getInstance()->getTextureCache()->addImage("texture.png");
+	// シェーダーコードからuniform変数の番号を取得
+	uniform_sampler = glGetUniformLocation(m_pProgram->getProgram(), "sampler");
+	// テクスチャファイルの読み込み
+	m_pTexture = Director::getInstance()->getTextureCache()->addImage("texture.png");
 
 	m_pProgram->link();
 
@@ -115,17 +118,20 @@ void ShaderNode::onDraw(const cocos2d::Mat4 & transform, uint32_t flags)
 	// 半透明合成
 	GL::blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	//GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION| GL::VERTEX_ATTRIB_FLAG_COLOR | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);
-	GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_COLOR);
+	// フラグで指定したattribute変数を有効にする
+	GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION| GL::VERTEX_ATTRIB_FLAG_COLOR | GL::VERTEX_ATTRIB_FLAG_TEX_COORD);
+	//GL::enableVertexAttribs(GL::VERTEX_ATTRIB_FLAG_POSITION | GL::VERTEX_ATTRIB_FLAG_COLOR);
 	// つかうよ！
 	m_pProgram->use();
 
+	// attribute変数にデータを転送
 	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, 0, pos);
 	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_COLOR, 4, GL_FLOAT, GL_FALSE, 0, color);
-	//glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, uv);
+	glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, 0, uv);
 
-	//glUniform1i(uniform_sampler, 0);
-	//GL::bindTexture2D(m_pTexture->getName());
+	// テクスチャデータを転送
+	glUniform1i(uniform_sampler, 0);
+	GL::bindTexture2D(m_pTexture->getName());
 
 	// uniform変数に値を転送する
 	glUniformMatrix4fv(uniform_wvp_matrix, 1, GL_FALSE, matWVP.m);

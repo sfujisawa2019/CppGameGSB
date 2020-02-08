@@ -1,4 +1,5 @@
 varying vec4 v_color;//入力（色）
+varying vec2 v_texCoord;
 
 //(入力)図形の中心座標
 uniform vec2 center;
@@ -7,10 +8,15 @@ uniform vec2 size_div2;
 //(入力)経過時間
 uniform float time;
 
+uniform sampler2D sampler;
+
 float u(float x) { return (x>0.0)?1.0:0.0; }
 
 void main()
 {
+	// テクスチャから指定座標の色を取得
+	vec4 texcolor = texture2D(sampler, v_texCoord);
+
 	// 描画ピクセルと図形の中心点の座標の差
 	// [-250～0～+250]
 	vec2 p = gl_FragCoord.xy - center;
@@ -52,4 +58,6 @@ void main()
 
 	// 最終的な色の決定
 	gl_FragColor = vec4(col, col+0.5*r_c, col, 1);
+
+	gl_FragColor = texcolor * v_color;
 }
