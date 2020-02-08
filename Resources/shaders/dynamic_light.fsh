@@ -17,7 +17,7 @@ void main()
 	// UVを加工の為にコピーする
 	vec2 texCoord = v_texCoord;
 	// UVをずらす
-	texCoord.y += sin(gl_FragCoord.x * 0.1) * 0.05;
+	texCoord.y += sin(gl_FragCoord.x * 0.1 + time * 6.28) * 0.05;
 
 	// テクスチャから指定座標の色を取得
 	vec4 texcolor = texture2D(sampler, texCoord);
