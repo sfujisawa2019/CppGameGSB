@@ -14,8 +14,13 @@ float u(float x) { return (x>0.0)?1.0:0.0; }
 
 void main()
 {
+	// UVを加工の為にコピーする
+	vec2 texCoord = v_texCoord;
+	// UVをずらす
+	texCoord.y += sin(gl_FragCoord.x * 0.1) * 0.05;
+
 	// テクスチャから指定座標の色を取得
-	vec4 texcolor = texture2D(sampler, v_texCoord);
+	vec4 texcolor = texture2D(sampler, texCoord);
 
 	// 描画ピクセルと図形の中心点の座標の差
 	// [-250～0～+250]
@@ -57,7 +62,7 @@ void main()
 	//	1);
 
 	// 最終的な色の決定
-	gl_FragColor = vec4(col, col+0.5*r_c, col, 1);
+	//gl_FragColor = vec4(col, col+0.5*r_c, col, 1) * texcolor;
 
 	gl_FragColor = texcolor * v_color;
 }
